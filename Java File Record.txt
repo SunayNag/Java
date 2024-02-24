@@ -1,0 +1,43 @@
+10/10/2023
+12:00 am
+1.Variables
+2.input
+3.areaOfCircle
+--------------------------
+11:00 am
+4.IfElse
+5.SwitchCase
+6.ForLoop
+--------------------------
+10:30pm
+7.SolidRectanglePatterns
+8.HollowRectanglePattern
+9.HalfPyramid
+10.InvertedHalfPyramid
+11.InvertedHalfPyramid180
+12.InvertedHalfPyramidNumber
+13.FloydTriangle
+__________________________
+11/10/2023
+3:00 pm
+1.Rhombus
+2.Pallindrome
+3.Butterfly
+4.PatternNumberPyramid
+5.PatternDiamond
+__________________________
+12/10/2023
+1.SimpleFuntion
+2.PrimeNumberChecker
+__________________________
+13/10/2023
+1.CountOfNumbersFromUser
+2.GreatestCommonDivisor
+3.Fibonnaci
+___________________________
+16/10/2023
+1.Array
+2.2d array
+____________________________
+23/11/2023
+1. Array Search
