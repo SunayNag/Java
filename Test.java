@@ -226,6 +226,6 @@ public class Test {
             }     
         }
         System.out.print(b);
-
+        sc.close();
     }
 }
