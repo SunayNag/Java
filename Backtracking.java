@@ -129,6 +129,63 @@ public class Backtracking{
         }
     }
 
+    public static boolean mouseMaze(int[][] mouseMaze, int row, int col, int tarRow, int tarCol, int sol[][]){
+        //base
+        if(row==tarRow&&col==tarCol){
+            System.out.println(row+" "+col);
+            sol[row][col]=1;
+            return true;
+        }
+        if(row>=mouseMaze.length||col>=mouseMaze.length){
+            return false;
+        }
+
+        //recursion
+        System.out.println("Choosing "+row+" "+col);
+        sol[row][col]=1;
+        //right
+        if((col+1<mouseMaze.length) && (mouseMaze[row][col+1]!=0) && mouseMaze(mouseMaze, row, col+1, tarRow, tarCol,sol)){
+            return true;
+        }
+
+        //down
+        if((row+1<mouseMaze.length) && (mouseMaze[row+1][col]!=0) && mouseMaze(mouseMaze, row+1, col, tarRow, tarCol,sol)){
+            return true;
+        }
+        System.out.println("Deleting "+row+" "+col);
+        sol[row][col]=0;
+        return false;
+    }
+
+    public static boolean isSafeKN(int board[][],int row, int col){
+        return (row>=0 && row<board.length && col>=0 && col<board.length && board[row][col]==-1);
+    }
+
+    public static boolean knight(int[][] board, int currRow, int currCol, int trav,int[] xMove, int[] yMove){
+        board[0][0]=1;
+        if(trav==board.length*board.length){
+            printSudoku(board);
+            return true;
+        }
+
+        for(int k=0;k<8;k++){
+            int next_x=currRow+xMove[k];
+            int next_y=currCol+yMove[k];
+            if(isSafeKN(board, next_x, next_y)){
+                board[next_x][next_y]=trav;
+                
+                if(knight(board, next_x, next_y, trav+1, xMove, yMove)){
+                    return true;
+                }
+                else
+                board[next_x][next_y]=-1;
+            }
+        }
+        return false;
+
+        //
+    }
+
     public static void main(String[] args) {
         // int arr[]= new int[5];
         // arrBack(arr, 0);
@@ -139,20 +196,49 @@ public class Backtracking{
         // System.out.println(gridSolve(0, 0, 10, 2));
         // System.out.println(gridSolveOpti(0, 0, 10, 0));
 
-        int sudoku[][]= {
-        {0,0,8,0,0,0,0,0,0},
-        {4,9,0,1,5,7,0,0,2},
-        {0,0,3,0,0,4,1,9,0},
-        {1,8,5,0,6,0,0,2,0},
-        {0,0,0,0,2,0,0,6,0},
-        {9,6,0,4,0,5,3,0,0},
-        {0,3,0,0,7,2,0,0,4},
-        {0,4,9,0,3,0,0,5,7},
-        {8,2,7,0,0,9,0,1,3}
-        };
+        // int sudoku[][]= {
+        // {0,0,8,0,0,0,0,0,0},
+        // {4,9,0,1,5,7,0,0,2},
+        // {0,0,3,0,0,4,1,9,0},
+        // {1,8,5,0,6,0,0,2,0},
+        // {0,0,0,0,2,0,0,6,0},
+        // {9,6,0,4,0,5,3,0,0},
+        // {0,3,0,0,7,2,0,0,4},
+        // {0,4,9,0,3,0,0,5,7},
+        // {8,2,7,0,0,9,0,1,3}
+        // };
 
-        if(sudokuSolver(sudoku, 0, 0)){
-            printSudoku(sudoku);
-        }
+        // if(sudokuSolver(sudoku, 0, 0)){
+        //     printSudoku(sudoku);
+        // }
+
+        
+        // int[][] mouseMaze ={
+        //     {1,1,1,1},
+        //     {0,1,0,1},
+        //     {1,1,1,1},
+        //     {1,0,1,1}
+        // };
+        // int sol[][] ={
+        //     {0,0,0,0},
+        //     {0,0,0,0},
+        //     {0,0,0,0},
+        //     {0,0,0,0}
+        // };
+        // System.out.println(mouseMaze(mouseMaze, 0, 0, 3, 2, sol));
+        // printSudoku(sol);
+        
+        
+        int[][] chess={
+            {-1,-1,-1,-1,-1,-1,-1,-1},
+            {-1,-1,-1,-1,-1,-1,-1,-1},
+            {-1,-1,-1,-1,-1,-1,-1,-1},
+            {-1,-1,-1,-1,-1,-1,-1,-1},
+            {-1,-1,-1,-1,-1,-1,-1,-1},
+            {-1,-1,-1,-1,-1,-1,-1,-1},
+            {-1,-1,-1,-1,-1,-1,-1,-1},
+            {-1,-1,-1,-1,-1,-1,-1,-1}
+        };
+        System.err.println(knight(chess, 0, 0, 0, new int[] { 2, 1, -1, -2, -2, -1, 1, 2 }, new int[] {1, 2, 2, 1, -1, -2, -2, -1}));
     }
 }
