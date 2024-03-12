@@ -178,7 +178,9 @@ abstract class Animals{
         System.out.println("Its an animal, ofcourse it eats");
     }
 
-    abstract void walk();
+    //Abstract methods need to be defined in derived classes
+    abstract 
+    void walk();
 }
 
 class Horse extends Animals{
@@ -193,6 +195,10 @@ class Chicken extends Animals{
     }
 }
 
+/*********************************************************************
+* Interfaces are used to implement same methods to different classes *
+* Interfaces only have abstract methods                              *
+**********************************************************************/
 interface ChessPiece{
     void moves();
 }
@@ -215,6 +221,7 @@ class Pawm implements ChessPiece{
     }
 }
 
+//Use of interface to have multiple inheritance
 interface Herbivore{
     void eat();
 
