@@ -35,6 +35,6 @@ public class Matrix {
         for(int i=0; i<n ;i++){
             System.out.print(prodArr[i]+"\t");
         }
+        sc.close();
     }
-    
 }
