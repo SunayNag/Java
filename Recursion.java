@@ -247,7 +247,7 @@ public class Recursion {
         // firstOccurence(arr1, 6, 0);
         // lastOccurence(arr1, 6, arr1.length-1);
         // System.out.println(power(-2, 10));
-        // System.err.println(powerOpti(2, 10));
+        System.err.println(powerOpti(2, 9));
         // System.out.println(tileWay(6));
         // removeDuplicate("apnacollege", 0, new StringBuilder(""), new boolean[26]);
         // System.out.println(pairingProblem(5));
@@ -256,8 +256,8 @@ public class Recursion {
         // yearToWords(2019);
         // towerOfHanoi(4, "Source", "Helper", "Destination");
         // stringReverse(3,"abcd");
-        firstAndLast("bcdeafgt", 'a', 0);
-        System.out.println(first+" "+last);
-        System.out.println(sortedCheck(new int[] {1,2,3,4,5,10,12,13,15}, 1));
+        // firstAndLast("bcdeafgt", 'a', 0);
+        // System.out.println(first+" "+last);
+        // System.out.println(sortedCheck(new int[] {1,2,3,4,5,10,12,13,15}, 1));
     }
 }
