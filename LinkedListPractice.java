@@ -59,6 +59,9 @@ public class LinkedListPractice {
             Node newNode= new Node(data);
             newNode.next=temp.next;
             temp.next = newNode;
+            if(idx==size){
+                tail=tail.next;
+            }
         }
         
         void deleteFirst(){
@@ -79,7 +82,7 @@ public class LinkedListPractice {
 
         void deleteLast(){
             Node temp=head;
-            while(temp.next!=tail){
+            while(temp!=tail){
                 temp=temp.next;
             }
             temp.next=null;
@@ -103,6 +106,7 @@ public class LinkedListPractice {
             }
             temp.next=temp.next.next;
         }
+        
         int itreativeSearch(int key){
             if(size==0){
                 return -1;
@@ -147,30 +151,134 @@ public class LinkedListPractice {
             tail=head;
             head=prev;
         }
+
+        void removeNthNode(int n){
+            if(n==size){
+                deleteFirst();
+                return;
+            }
+            if(n==1){
+                deleteLast();
+                return;
+            }
+            Node prev=null;
+            Node temp=head;
+            int i=0;
+            for(;i<size-n;i++){
+                prev=temp;
+                temp=temp.next;
+            }
+            prev.next=temp.next;
+        }
+
+        Node findMiddle(Node head){
+            Node slow, fast;
+            slow=fast=head;
+            while(fast!=null && fast.next!=null){
+                fast=fast.next.next;
+                slow=slow.next;
+            }
+            return slow;
+        }
+
+        boolean isPalindrome(){
+            if(head==null || head.next==null);
+            
+            //Step 1
+            Node mid= findMiddle(head);
+
+            //Step 2
+            Node prev=null, curr=mid, next;
+            while(curr!=null){
+                next=curr.next;
+                curr.next=prev;
+                prev=curr;
+                curr=next;
+            }
+            Node right= prev;
+            Node left = head;
+
+            //step 3
+            while(right!=null){
+                if(right.data!=left.data){
+                    return false;
+                }
+                left=left.next;
+                right=right.next;
+            }
+
+            return true;
+        }
+
+        boolean hasCycle(){
+            Node slow=head,fast=head;
+            while(fast!=null && fast.next!=null){
+                slow=slow.next;
+                fast=fast.next.next;
+                if(slow==fast){
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        void removeLoop(){
+            Node slow=head,fast=head, prev=null;
+            while(fast!=null && fast.next!=null){
+                slow=slow.next;
+                fast=fast.next.next;
+                if(slow==fast){
+                    slow=head;
+                    break;
+                }
+            }
+            while (slow!=fast) {
+                prev=fast;
+                slow=slow.next;
+                fast=fast.next;
+            }
+            prev.next=null;
+            return;
+        }
+
     }
 
     public static void main(String[] args) {
-        LinkedList ll = new LinkedList();
-        System.out.println(ll.size);
-        ll.add(2);
-        ll.printList();
-        System.out.println(ll.size);
-        ll.add(1);
-        ll.printList();
-        System.out.println(ll.size);
-        ll.addLast(3);
-        ll.printList();
-        System.out.println(ll.size);
-        ll.addLast(4);
-        ll.printList();
-        System.out.println(ll.size);
-        ll.add(4,5);
-        ll.printList();
-        System.out.println(ll.size);
-        System.out.println(ll.itreativeSearch(5));
-        System.out.println(ll.recursiveSearch(3, ll.head));
-        ll.reverseList();
-        ll.printList();
+        // LinkedList ll = new LinkedList();
+        // System.out.println(ll.size);
+        // ll.add(2);
+        // ll.printList();
+        // System.out.println(ll.size);
+        // ll.add(1);
+        // ll.printList();
+        // System.out.println(ll.size);
+        // ll.addLast(3);
+        // ll.printList();
+        // System.out.println(ll.size);
+        // ll.addLast(2);
+        // ll.printList();
+        // System.out.println(ll.size);
+        // ll.add(4,1);
+        // ll.printList();
+        // System.out.println(ll.size);
+        // System.out.println(ll.itreativeSearch(5));
+        // System.out.println(ll.recursiveSearch(3, ll.head));
+        // ll.reverseList();
+        // // ll.removeNthNode(1);
+        // ll.removeNthNode(3);
+        // ll.printList();
+        // System.out.println(ll.isPalindrome());
 
+        LinkedList ll2 = new LinkedList();
+        ll2.add(5);
+        ll2.add(4);
+        ll2.add(3);
+        ll2.add(2);
+        ll2.add(1);
+        ll2.tail.next = ll2.head.next;
+        System.out.println(ll2.hasCycle());
+        ll2.printList();
+        ll2.removeLoop();
+        ll2.printList();
     }
 }
