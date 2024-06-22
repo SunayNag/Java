@@ -1,5 +1,5 @@
 public class LinkedListPractice {
-    public static class LinkedList{
+    public static class Linked_List{
         public static class Node{
             private
             int data;
@@ -269,7 +269,7 @@ public class LinkedListPractice {
         // ll.printList();
         // System.out.println(ll.isPalindrome());
 
-        LinkedList ll2 = new LinkedList();
+        Linked_List ll2 = new Linked_List();
         ll2.add(5);
         ll2.add(4);
         ll2.add(3);
@@ -277,7 +277,6 @@ public class LinkedListPractice {
         ll2.add(1);
         ll2.tail.next = ll2.head.next;
         System.out.println(ll2.hasCycle());
-        ll2.printList();
         ll2.removeLoop();
         ll2.printList();
     }
