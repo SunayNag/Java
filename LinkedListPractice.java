@@ -241,22 +241,90 @@ public class LinkedListPractice {
             return;
         }
 
+        private Node merge(Node leftHead, Node rightHead){
+            Node mergedLL = new Node(-1);
+            Node temp = mergedLL;
+            while(leftHead!=null && rightHead!=null){
+                if(leftHead.data<rightHead.data){
+                    temp.next = leftHead;
+                    leftHead = leftHead.next;
+                }
+                else{
+                    temp.next = rightHead;
+                    rightHead = rightHead.next;
+                }
+                temp=temp.next;
+            }
+
+            while (leftHead!=null) {
+                temp.next = leftHead;
+                leftHead = leftHead.next;
+                temp=temp.next;
+            }
+            while (rightHead!=null) {
+                temp.next =rightHead;
+                rightHead = rightHead.next;
+                temp=temp.next;
+            }
+            return mergedLL.next;
+        }
+
+        Node mergeSort(Node head){
+            if(head==null || head.next==null){
+                return head;
+            }
+            
+            Node slow= head;
+            Node fast = head.next;
+            Node rightHead;
+            
+            //find mid
+            while(fast!=null && fast.next!=null){
+                slow= slow.next;
+                fast = fast.next;
+            }
+            rightHead= slow.next;
+            slow.next=null;
+
+            //left right MS
+            Node newLeft = mergeSort(head);
+            Node newRight= mergeSort(rightHead);
+
+            //merge
+            return merge(newLeft, newRight);
+        }
+
+        void zigzag(){
+            Node temp1=head;
+            Node mid = findMiddle(head);
+            Node prev=null, curr=mid, next;
+            while(curr!=null){
+                next=curr.next;
+                curr.next=prev;
+                prev=curr;
+                curr=next;
+            }
+            while(temp1!=null&&tail.next!=null){
+                System.out.println(tail.data);
+                next=temp1.next;
+                temp1.next=tail;
+                temp1=next;
+                next=tail.next;
+                tail.next= temp1;
+                tail=next;
+            }
+        }
     }
 
     public static void main(String[] args) {
-        // LinkedList ll = new LinkedList();
-        // System.out.println(ll.size);
-        // ll.add(2);
-        // ll.printList();
-        // System.out.println(ll.size);
-        // ll.add(1);
-        // ll.printList();
-        // System.out.println(ll.size);
-        // ll.addLast(3);
-        // ll.printList();
-        // System.out.println(ll.size);
-        // ll.addLast(2);
-        // ll.printList();
+        Linked_List ll = new Linked_List();
+        ll.add(2);
+        ll.add(1);
+        ll.addLast(3);
+        ll.addLast(4);
+        ll.addLast(5);
+        ll.addLast(6);
+        ll.printList();
         // System.out.println(ll.size);
         // ll.add(4,1);
         // ll.printList();
@@ -270,14 +338,21 @@ public class LinkedListPractice {
         // System.out.println(ll.isPalindrome());
 
         Linked_List ll2 = new Linked_List();
-        ll2.add(5);
-        ll2.add(4);
-        ll2.add(3);
-        ll2.add(2);
         ll2.add(1);
-        ll2.tail.next = ll2.head.next;
-        System.out.println(ll2.hasCycle());
-        ll2.removeLoop();
-        ll2.printList();
+        ll2.add(2);
+        ll2.add(3);
+        ll2.add(4);
+        ll2.add(6);
+        ll2.add(7);
+        // ll2.add(8);
+        // ll2.tail.next = ll2.head.next;
+        // System.out.println(ll2.hasCycle());
+        // ll2.removeLoop();
+        // ll2.printList();
+        // ll2.head = ll2.mergeSort(ll2.head);
+        // ll2.printList();
+
+        ll.zigzag();
+        ll.printList();
     }
 }
