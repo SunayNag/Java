@@ -1,4 +1,7 @@
 import java.util.*;
+class Processes{
+    int pid=0, bt=0, wt=0, tt=0, at=0,et=0;
+}
 public class OperatingSystem_SJF {
     public static void sortBT(List<Processes> p){
         p.sort((o1,o2)->o1.bt - o2.bt);
@@ -90,8 +93,4 @@ public class OperatingSystem_SJF {
         System.out.println("|:"+currTime);
         sc.close();
     }
-}
-
-class Processes{
-    int pid=0, bt=0, wt=0, tt=0, at=0,et=0;
 }

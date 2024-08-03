@@ -134,9 +134,9 @@ public class ArrayListPractice{
         ArrayList<Integer> list1 = new ArrayList<>(Arrays.asList(1,2,3,4,5));
         ArrayList<Integer> list2 = new ArrayList<>(Arrays.asList(10,11,6,7,8,9));
         ArrayList<Integer> list3 = new ArrayList<>(Arrays.asList(10,12,6,5,8)); 
-        // targetSumBrute(list1, 6);
+        targetSumBrute(list1, 6);
         // System.out.println(targetSumTwoPointer(list1, 5));
-        // System.out.println(targetSumRotated(list2, 20));
+        System.out.println(targetSumRotated(list2, 20));
         System.out.println(isLonely(list3));
         
     }

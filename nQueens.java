@@ -1,5 +1,5 @@
 public class nQueens {
-    public static boolean nQueens(char board[][], int row){
+    public static boolean nQueen(char board[][], int row){
         if(row==board.length){
             printBoard(board);
             count++;
@@ -8,7 +8,7 @@ public class nQueens {
         for(int i=0;i<board.length;i++){
             if(isSafe(row, i, board)){
                 board[row][i]='Q';
-                if(nQueens(board, row+1)){
+                if(nQueen(board, row+1)){
                     return true;
                 }
                 board[row][i]='x';
