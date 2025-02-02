@@ -1,4 +1,8 @@
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 public class DivideAndConquer {
     public static void mergeSortString(String[] arr,int si,int ei){
@@ -187,21 +191,67 @@ public class DivideAndConquer {
         if(leftCount==rightCount){System.out.println(left+" & "+right+" are in equal numbers with count of "+leftCount);}
         return leftCount>rightCount ? left:right;
     }
+    
+    public static int binarysearch(int[] arr, int k) {
+        int n = arr.length-1;
+        int start = 0;
+        int end = n;
+        int mid = (n/2)+1;
+        if(arr[0]>k || arr[n]<k) return -1;
+        while(arr[mid]!=k){
+            System.out.println("Before:"+start+" "+end);
+            if(arr[mid]<k){
+                start=mid+1;
+                mid=start+(end-start)/2;
+            }
+            else if(arr[mid]>k){
+                end=mid-1;
+                mid=start+(end - start)/2;
+            }
+            System.out.println("After:"+start+" "+end);
+            if(arr[mid]!=k && start>=end){
+                return -1;
+            }
+        }
+        while(mid!=0 && arr[mid-1]==arr[mid]){
+            mid--;
+        }
+        return mid;
+    }
     public static void main(String[] args) {
         int[] arr = {1,9,5,6,3,7,2,8,4};
         mergeSort(arr, 0, arr.length-1);
 
         // quickSort(arr, 0, arr.length-1);
-        System.out.println(Arrays.toString(arr));
-        int[] arr2 ={4,5,6,7,1,2,3};
-        System.out.println(rotatedAndSortedIteration(arr2, 2));
+        // System.out.println(Arrays.toString(arr));
+        // int[] arr2 ={4,5,6,7,1,2,3};
+        // System.out.println(rotatedAndSortedIteration(arr2, 2));
 
-        String[] arr1 = {"sun", "earth", "mercury", "mars","venus","jupiter","saturn","uranus","neptune"};
-        mergeSortString(arr1, 0, arr1.length-1);
-        System.out.println(Arrays.toString(arr1));
-        int[] arr3= {1,1,1,2,2,2,3,3,3};
+        // String[] arr1 = {"sun", "earth", "mercury", "mars","venus","jupiter","saturn","uranus","neptune"};
+        // mergeSortString(arr1, 0, arr1.length-1);
+        // System.out.println(Arrays.toString(arr1));
+        int[] arr3= {5,7,3,6,1,10,5,14};
 
-        System.out.println("Final result:"+majority(arr3, 0,arr3.length-1));
+        // System.out.println("Final result:"+majority(arr3, 0,arr3.length-1));
 
+        int[] arr4 = {1,2,5,6,8,9};
+        // System.out.println(binarysearch(arr4, 1));
+        int a1 = arr3.length;
+        int b1 = arr4.length;
+        int[] c = new int[a1+b1];
+        System.arraycopy(arr3,0,c,0,a1);
+        System.arraycopy(arr4,0,c,a1,b1);
+        Set<Integer> s = new HashSet<Integer>();
+        for(int i: arr4){
+            s.add(i);
+        }
+        for(int i: arr3){
+            s.add(i);
+        }
+        System.out.println(s);
+        ArrayList<Integer> a = new ArrayList<>(s);
+        System.out.println(a);
+        a.sort(null); 
+        
     }
 }

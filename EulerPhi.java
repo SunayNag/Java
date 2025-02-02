@@ -25,7 +25,7 @@ result -= result / p;
 }}
 
 if (n > 1){
-System.out.println(n);
+System.out.println(result/n);
 result -= result / n;
 }
 

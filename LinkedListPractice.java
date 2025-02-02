@@ -314,7 +314,57 @@ public class LinkedListPractice {
                 tail=next;
             }
         }
+
+        static int countNode(Node head){
+            int count=0;
+            Node ptr=head;
+            while(ptr!=null){
+                count++;
+                ptr=ptr.next;
+            }
+            return count;
+        }
+        static void eliminateZero(Node head){
+            while(head.data==0){
+                head=head.next;
+            }
+        }
+
+        Node addTwoLists(Node num1, Node num2) {
+            eliminateZero(num1);
+            eliminateZero(num2);
+            int count1=countNode(num1);
+            int count2=countNode(num2);
+            
+            if(count1<count2){
+                return addTwoLists(num2,num1);
+            }
+            
+            num1=num1.reverseList();;
+            num2=reverse(num2);
+            
+            int carry=0;
+            Node sum = num1;
+            while(num2 != null || carry != 0){
+                num2.data+=carry;
+                if(num2!=null){
+                    num1.data+=num2.data;
+                    num2=num2.next;
+                }
+                carry=num1.data/10;
+                num1.data%=10;
+                if(num1.next==null && carry!=0){
+                    num1.next=new Node(0);
+                }
+            }
+            
+            reverse(sum);
+            return sum;
+            
+        }
     }
+
+    
 
     public static void main(String[] args) {
         Linked_List ll = new Linked_List();

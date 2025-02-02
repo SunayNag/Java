@@ -11,7 +11,7 @@ public class nQueens {
                 if(nQueen(board, row+1)){
                     return true;
                 }
-                board[row][i]='x';
+                board[row][i]='.';
             }
         }
         return false;
@@ -98,7 +98,13 @@ public class nQueens {
 
     public static void printBoard(char board[][]){
         System.out.println("------Chess Board-------");
+        System.out.print("\t");
+        for (int i = 0; i < board.length; i++) {
+            System.out.print((char)((i)+'a')+" ");
+        }
+        System.out.println();
         for(int i=0;i<board.length;i++){
+            System.out.print(i+"\t");
             for(int j=0;j<board.length;j++){
                 System.out.print(board[i][j]+" ");
             }
@@ -108,16 +114,16 @@ public class nQueens {
 
     static int count=0;
     public static void main(String[] args) {
-        int n=5;
+        int n=4;
         char board[][]= new char[n][n];
         for(int i=0; i<n;i++){
             for(int j=0;j<n;j++){
-                board[i][j]='x';
+                board[i][j]='.';
             }
         }
         // nQueens(board, 0);
         // System.out.println(count);
-        nKnights(board, 0);
+        nQueen(board, 0);
         System.out.println(count);
     }
     

@@ -1,77 +1,74 @@
-import java.util.*;
-public class StackImple {
-    public static void pushAtBottom(Stack<Integer> s, int data){
-        if(s.isEmpty()){
-            s.push(data);
+import java.util.Scanner;
+
+class Node{
+    int data;
+    Node next;
+    Node(int data){
+        this.data=data;
+        this.next=null;
+    }
+}
+
+class Stack{
+    Node top;
+    Stack(){
+        this.top=null;
+    }
+    public void push(int data){
+        Node temp= new Node(data);
+        temp.next=top;
+        top=temp;
+    }
+    void pop(){
+        if(top==null){
+            System.out.println("Stack empty");
             return;
         }
-        int temp = s.pop();
-        pushAtBottom(s, data);
-        s.push(temp);
+        System.out.println(top.data);
+        top=top.next;
     }
-
-    public static String reverseString(String str){
-        Stack<Character> s = new Stack<>();
-        int idx = 0;
-        while(idx<str.length()){
-            s.push(str.charAt(idx));
-            idx++;
-        }
-        StringBuilder strb = new StringBuilder("");
-        while(!s.isEmpty()){
-            // System.out.println(s.peek());
-            strb.append(s.pop());
-        }
-        return strb.toString();
-    }
-    
-    public static void reverseStack(Stack<Integer> s){
-        if(s.isEmpty()){
+    public void traverse(){
+        if (top==null) {
+            System.out.println("Stack empty");
             return;
         }
-        int top = s.pop();
-        reverseStack(s);
-        pushAtBottom(s, top);
-        return;
-    }
-
-    public static void printStack(Stack<Integer> s){
-        while(!s.isEmpty()){
-            System.out.print(s.pop()+" ");
+        Node temp=top;
+        while(temp!=null){
+            System.out.print(temp.data+" ");
+            temp=temp.next;
         }
         System.out.println();
-    }
 
-    public static void stockSpan(int[] stock, int span[]){
-        Stack<Integer> s = new Stack<>();
-        for(int i=0;i<stock.length;i++){
-            if(s.isEmpty()){
-                span[i]=i+1;
-                s.push(null);
-            }
-            while(stock[i]>=stock[s.peek()]){
-                s.pop();
-            }
-            if(stock[i]<stock[s.peek()]){
-                span[i]=i-s.peek();
-                s.push(i);
+    }
+}
+
+public class StackImple{
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Stack s = new Stack();
+        while(true){
+            int choice = Integer.parseInt(sc.next().trim());
+            switch (choice) {
+                case 1:
+                    s.push(Integer.parseInt(sc.nextLine().trim()));
+                    break;
+                
+                case 2:
+                    s.pop();
+                    break;
+    
+                case 3:
+                    s.traverse();
+                    break;
+                case 4:
+                    System.out.println("Exiting program");
+                    sc.close();
+                    return;
+                default:
+                    System.out.println("Invalid Input");
+                    break;
             }
         }
-    }
-    public static void main(String[] args) {
-        Stack<Integer> s = new Stack<>();
-        // System.out.println(s.isEmpty());
-        // s.push(1);
-        // s.push(2);
-        // s.push(3);
-        // pushAtBottom(s, 4);
-        // reverseStack(s);
-        // printStack(s);
-        // String str = "Sunay";
-        // System.out.print(reverseString(str));
-        int[] stock = {100,80,60,70,60,85,100};
-        int[] span = new int[stock.length];
-        stockSpan(stock, span);
-        System.out.println(span);
+        
     }
 }
