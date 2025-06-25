@@ -50,7 +50,7 @@ public class StackImple{
             int choice = Integer.parseInt(sc.next().trim());
             switch (choice) {
                 case 1:
-                    s.push(Integer.parseInt(sc.nextLine().trim()));
+                    s.push(Integer.parseInt(sc.next().trim()));
                     break;
                 
                 case 2:
