@@ -46,8 +46,8 @@ public class QueueProblems {
         for(int i=1;i<=n;i++){
             q.add(i);
         }
-        System.out.println(q.toString());
+        System.out.println(q);
         interWeave(q);
-        System.out.println(q.toString());
+        System.out.println(q);
     }
 }
