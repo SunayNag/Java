@@ -156,7 +156,9 @@ public class Order {
             getPath(n, b, pathB);
             Collections.reverse(pathA);
             Collections.reverse(pathB);
-            int lca = n.data;
+            // System.out.println(pathA);
+            // System.out.println(pathB);
+            int lca = -1;
             for(int i=0;i<pathA.size() && i<pathB.size();i++){
                 if(pathA.get(i)!=pathB.get(i)){
                     break;
@@ -184,6 +186,84 @@ public class Order {
             }
             return false;
         }
+        
+        //LCA second approach
+        Node lca2(Node n, int a, int b){
+            if(n==null || n.data==a || n.data==b){
+                return n;
+            }
+            Node left = lca2(n.left, a, b);
+            Node right = lca2(n.right, a, b);
+
+            if(right == null){
+                return left;
+            }
+            if(left==null){
+                return right;
+            }
+            // System.out.println("hey "+n.data+" "+left.data+" "+right.data);
+            return n;
+        }
+    
+        //Min Distance My Approach
+        int minDist(Node n, int a, int b){
+            List<Integer> pathA = new ArrayList<>();
+            List<Integer> pathB = new ArrayList<>();
+
+            getPath(n, a, pathA);
+            getPath(n, b, pathB);
+            Collections.reverse(pathA);
+            Collections.reverse(pathB);
+            // System.out.println(pathA);
+            // System.out.println(pathB);
+            int i=0;
+            for(;i<pathA.size() && i<pathB.size();i++){
+                if(pathA.get(i)!=pathB.get(i)){
+                    break;
+                }
+            }
+            int A = pathA.size()-i;
+            int B = pathB.size()-i;
+            return A+B;
+        }
+    
+        //Min Distance using LCA2
+        int minDist2(Node n, int a, int b){
+            Node lca = lca2(n, a, b);
+            int n1 = lcaDist(lca, a);
+            int n2 = lcaDist(lca, b);
+            return n1+n2;
+
+
+        }
+        int lcaDist(Node n, int a){
+            if(n==null){
+                return -1;
+            }
+            if(n.data==a){
+                return 0;
+            }
+            int left = lcaDist(n.left, a);
+            int right = lcaDist(n.right, a);
+            if(left<0 && right<0){
+                return -1;
+            }
+            return (left>right?left:right)+1;
+        }
+
+
+        //Kth Ancestor
+        int kthAncestor(Node n, int t, int k){
+            List<Integer> path = new ArrayList<>();
+            getPath(n, t, path);
+            // System.out.println(path);
+            if(k>path.size()-1) return -1;
+            int result=path.get(0);
+            for(int i=1;i<=k;i++){
+                result=path.get(i);
+            }
+            return result;
+        }
     }
     public static void main(String[] args) {
         int[] tree = {1,2,4,8,-1,-1,-1,5,-1,9,-1,-1,3,6,-1,-1,7,-1,10,-1,-1};
@@ -195,16 +275,23 @@ public class Order {
         bt.idx=-1;
         Node subT = bt.buildPre(subTree);
 
-        System.out.println(rootPre.data);
-        // bt.preOrder(rootPre);
-        // System.out.println();
+        System.out.print("preOrder:");
+        bt.preOrder(rootPre);
+        System.out.println();
+        System.out.println("Level Order:");
         bt.levelOrder(rootPre);
-        // System.out.println(bt.height(rootPre));
-        // System.out.println(bt.countNode(rootPre));
-        // System.out.println(bt.sumNode(rootPre));
-        System.out.println(bt.diam(rootPre));
-        System.out.println(bt.subtree(rootPre, subT));
-        // bt.kthLevel(rootPre, 4);
-        System.out.println(bt.lca(rootPre, 6, 10));
+        System.out.println("Height:"+bt.height(rootPre));
+        System.out.println("No. of Nodes:"+bt.countNode(rootPre));
+        System.out.println("Sum of Nodes:"+bt.sumNode(rootPre));
+        System.out.println("Diameter:"+bt.diam(rootPre));
+        System.out.println("Is Subtree:"+bt.subtree(rootPre, subT));
+        System.out.print("Kth Level:");
+        bt.kthLevel(rootPre, 4);
+        System.out.println();
+        System.out.println("LCA1:"+bt.lca(rootPre, 8, 12));
+        System.out.println("LCA2:"+bt.lca2(rootPre, 8, 10).data);
+        System.out.println("Min1:"+bt.minDist(rootPre,10, 8));
+        System.out.println("Min2:"+bt.minDist2(rootPre, 10, 8));
+        System.out.println("Kth Ancestor:"+bt.kthAncestor(rootPre, 10,2));
     }
 }
