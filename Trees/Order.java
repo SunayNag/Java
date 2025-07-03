@@ -264,6 +264,58 @@ public class Order {
             }
             return result;
         }
+    
+        //Convert to sum tree
+        int sumTree(Node n){
+            if(n==null){
+                return 0;
+            }
+            int left = sumTree(n.left);
+            int right = sumTree(n.right);
+            int curr = n.data;
+            n.data = left+right;
+            return curr+n.data; 
+        }
+
+        //Check for univalued Binary Tree
+        boolean uniVal(Node n){
+            if(n==null){
+                return true;
+            }
+            boolean left = uniVal(n.left);
+            boolean right = uniVal(n.right);
+
+            if((left && right)){
+                if(n.left!=null && n.left.data!=n.data){
+                    // System.out.println(left.data+" "+n.data+" hail");
+                    return false;
+                }
+                if(n.right!=null && n.right.data!=n.data){
+                    return false;
+                }
+                return true;
+            }
+            else{
+                return false;
+            }
+            
+            
+        }
+    
+        //Flip the tree
+        void flip(Node n){
+            if(n==null){
+                return;
+            }
+            flip(n.left);
+            flip(n.right);
+            swap(n);
+        }
+        void swap(Node n){
+            Node temp = n.left;
+            n.left=n.right;
+            n.right=temp;
+        }
     }
     public static void main(String[] args) {
         int[] tree = {1,2,4,8,-1,-1,-1,5,-1,9,-1,-1,3,6,-1,-1,7,-1,10,-1,-1};
@@ -293,5 +345,17 @@ public class Order {
         System.out.println("Min1:"+bt.minDist(rootPre,10, 8));
         System.out.println("Min2:"+bt.minDist2(rootPre, 10, 8));
         System.out.println("Kth Ancestor:"+bt.kthAncestor(rootPre, 10,2));
+        System.out.println("Calling the sum tree function");
+        bt.sumTree(rootPre);
+        System.out.println("New tree:");
+        bt.levelOrder(rootPre);
+        int[] tree2 = {1,2,4,8,-1,-1,-1,5,-1,9,-1,-1,3,6,-1,-1,7,-1,10,-1,-1};
+        bt.idx=-1;
+        Node idn = bt.buildPre(tree2);
+        System.out.println("New Tree:");
+        bt.levelOrder(idn);
+        System.out.println("The tree is uniVal:"+bt.uniVal(idn));
+        bt.flip(idn);
+        bt.levelOrder(idn);
     }
 }
